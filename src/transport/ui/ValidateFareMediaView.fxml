@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="transport.control.ValidateFareMediaController"
+            prefHeight="768.0" prefWidth="1024.0">
+
+    <!-- Left Sidebar -->
+    <left>
+        <VBox styleClass="sidebar" prefWidth="200" spacing="10">
+            <padding>
+                <Insets top="20" right="10" bottom="20" left="10"/>
+            </padding>
+
+            <Label text="ESI-RUN" styleClass="sidebar-title"/>
+            <Label text="Transport System" styleClass="sidebar-subtitle"/>
+
+            <Separator/>
+
+            <Button text="Tableau de bord" styleClass="sidebar-button" onAction="#handleHome"/>
+            <Button text="Utilisateurs" styleClass="sidebar-button" onAction="#handleUsers"/>
+            <Button text="Titres" styleClass="sidebar-button" onAction="#handleFareMedia"/>
+            <Button text="Validation" styleClass="sidebar-button, active-nav" onAction="#handleValidation"/>
+            <Button text="Réclamations" styleClass="sidebar-button" onAction="#handleComplaints"/>
+
+            <Region VBox.vgrow="ALWAYS"/>
+
+            <Separator/>
+            <Button text="Déconnexion" styleClass="sidebar-button"/>
+        </VBox>
+    </left>
+
+    <!-- Main Content -->
+    <center>
+        <VBox spacing="20" style="-fx-padding: 20px;">
+            <Label text="Validation d'un titre de transport" styleClass="section-title">
+                <font>
+                    <Font name="System Bold" size="24.0"/>
+                </font>
+            </Label>
+
+            <Label text="Entrez l'ID du titre et la date de validation pour vérifier sa validité"
+                   wrapText="true" textAlignment="CENTER"/>
+
+            <VBox spacing="15" maxWidth="500" alignment="CENTER">
+                <HBox spacing="10" alignment="CENTER">
+                    <Label text="ID du titre:" prefWidth="120" styleClass="form-label"/>
+                    <TextField fx:id="idField" prefWidth="300" styleClass="text-field"/>
+                </HBox>
+
+                <HBox spacing="10" alignment="CENTER">
+                    <Label text="Date de validation:" prefWidth="120" styleClass="form-label"/>
+                    <DatePicker fx:id="validationDatePicker" prefWidth="300" styleClass="date-picker"/>
+                </HBox>
+
+                <Button text="Valider" onAction="#handleValidate" styleClass="button" prefWidth="200"/>
+            </VBox>
+
+            <!-- Result Panel -->
+            <VBox fx:id="resultBox" visible="false" managed="false" styleClass="card" spacing="15" maxWidth="600" alignment="CENTER">
+                <padding>
+                    <Insets top="20" right="20" bottom="20" left="20"/>
+                </padding>
+
+                <HBox alignment="CENTER" spacing="15">
+                    <ImageView fx:id="resultIcon" fitHeight="48" fitWidth="48" preserveRatio="true"/>
+                    <Label fx:id="resultLabel" styleClass="card-title" wrapText="true"/>
+                </HBox>
+
+                <Separator/>
+
+                <VBox fx:id="detailsBox" spacing="10">
+                    <GridPane hgap="15" vgap="10">
+                        <columnConstraints>
+                            <ColumnConstraints minWidth="100" prefWidth="150"/>
+                            <ColumnConstraints minWidth="200" prefWidth="300"/>
+                        </columnConstraints>
+
+                        <Label text="ID:" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="form-label"/>
+                        <Label fx:id="detailIdLabel" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+                        <Label text="Type:" GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="form-label"/>
+                        <Label fx:id="detailTypeLabel" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+                        <Label text="Date d'achat:" GridPane.columnIndex="0" GridPane.rowIndex="2" styleClass="form-label"/>
+                        <Label fx:id="detailDateLabel" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+                        <Label text="Prix:" GridPane.columnIndex="0" GridPane.rowIndex="3" styleClass="form-label"/>
+                        <Label fx:id="detailPrixLabel" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+                        <Label fx:id="detailProprietaireTitle" text="Propriétaire:" visible="false"
+                               GridPane.columnIndex="0" GridPane.rowIndex="4" styleClass="form-label"/>
+                        <Label fx:id="detailProprietaireLabel" visible="false"
+                               GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+
+                        <Label fx:id="detailTypeCarteTitle" text="Type de carte:" visible="false"
+                               GridPane.columnIndex="0" GridPane.rowIndex="5" styleClass="form-label"/>
+                        <Label fx:id="detailTypeCarteLabel" visible="false"
+                               GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+                    </GridPane>
+                </VBox>
+
+                <Button text="Fermer" onAction="#handleCloseResult" styleClass="button-secondary" prefWidth="150"/>
+            </VBox>
+        </VBox>
+    </center>
+
+    <!-- Footer -->
+    <bottom>
+        <HBox styleClass="footer" alignment="CENTER">
+            <Label text="© 2023 ESI-RUN Transport System - Tous droits réservés" styleClass="footer-text"/>
+        </HBox>
+    </bottom>
+</BorderPane>

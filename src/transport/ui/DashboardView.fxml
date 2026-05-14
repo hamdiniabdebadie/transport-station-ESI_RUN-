@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.chart.PieChart?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="transport.control.DashboardController"
+            prefHeight="768.0" prefWidth="1024.0">
+
+    <!-- Left Sidebar -->
+    <left>
+        <VBox styleClass="sidebar" prefWidth="200" spacing="10">
+            <padding>
+                <Insets top="20" right="10" bottom="20" left="10"/>
+            </padding>
+
+            <Label text="ESI-RUN" styleClass="sidebar-title"/>
+            <Label text="Transport System" styleClass="sidebar-subtitle"/>
+
+            <Separator/>
+
+            <Button text="Tableau de bord" styleClass="sidebar-button, active-nav" onAction="#handleHome"/>
+            <Button text="Utilisateurs" styleClass="sidebar-button" onAction="#handleUsers"/>
+            <Button text="Titres" styleClass="sidebar-button" onAction="#handleFareMedia"/>
+            <Button text="Validation" styleClass="sidebar-button" onAction="#handleValidation"/>
+            <Button text="Réclamations" styleClass="sidebar-button" onAction="#handleComplaints"/>
+
+            <Region VBox.vgrow="ALWAYS"/>
+
+            <Separator/>
+            <Button text="Déconnexion" styleClass="sidebar-button"/>
+        </VBox>
+    </left>
+
+    <!-- Main Content -->
+    <center>
+        <VBox spacing="20" style="-fx-padding: 20px;">
+            <Label text="Tableau de bord" styleClass="section-title">
+                <font>
+                    <Font name="System Bold" size="24.0"/>
+                </font>
+            </Label>
+
+            <!-- Dashboard Stats -->
+            <HBox spacing="20" alignment="CENTER">
+                <VBox styleClass="dashboard-tile" alignment="CENTER" prefWidth="180" prefHeight="120">
+                    <Label fx:id="userCountLabel" text="0" styleClass="tile-value"/>
+                    <Label text="Utilisateurs" styleClass="tile-label"/>
+                </VBox>
+
+                <VBox styleClass="dashboard-tile" alignment="CENTER" prefWidth="180" prefHeight="120">
+                    <Label fx:id="ticketCountLabel" text="0" styleClass="tile-value"/>
+                    <Label text="Tickets" styleClass="tile-label"/>
+                </VBox>
+
+                <VBox styleClass="dashboard-tile" alignment="CENTER" prefWidth="180" prefHeight="120">
+                    <Label fx:id="cardCountLabel" text="0" styleClass="tile-value"/>
+                    <Label text="Cartes" styleClass="tile-label"/>
+                </VBox>
+
+                <VBox styleClass="dashboard-tile" alignment="CENTER" prefWidth="180" prefHeight="120">
+                    <Label fx:id="complaintCountLabel" text="0" styleClass="tile-value"/>
+                    <Label text="Réclamations" styleClass="tile-label"/>
+                </VBox>
+            </HBox>
+
+            <!-- Charts Section -->
+            <HBox spacing="20" alignment="CENTER">
+                <VBox styleClass="card" prefWidth="380" prefHeight="300">
+                    <Label text="Répartition des titres" styleClass="card-title"/>
+                    <PieChart fx:id="fareMediaChart" legendVisible="true" labelsVisible="true" VBox.vgrow="ALWAYS"/>
+                </VBox>
+
+                <VBox styleClass="card" prefWidth="380" prefHeight="300">
+                    <Label text="Activité par catégorie" styleClass="card-title"/>
+                    <PieChart fx:id="activityChart" legendVisible="true" labelsVisible="true" VBox.vgrow="ALWAYS"/>
+                </VBox>
+            </HBox>
+
+            <!-- Recent Activity -->
+            <Label text="Activité récente" styleClass="section-title">
+                <font>
+                    <Font name="System Bold" size="18.0"/>
+                </font>
+            </Label>
+
+            <TableView fx:id="recentActivityTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="activityDateColumn" text="Date" prefWidth="150"/>
+                    <TableColumn fx:id="activityTypeColumn" text="Type" prefWidth="150"/>
+                    <TableColumn fx:id="activityDetailsColumn" text="Détails" prefWidth="400"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </center>
+
+    <!-- Footer -->
+    <bottom>
+        <HBox styleClass="footer" alignment="CENTER">
+            <Label text="© 2023 ESI-RUN Transport System - Tous droits réservés" styleClass="footer-text"/>
+        </HBox>
+    </bottom>
+</BorderPane>

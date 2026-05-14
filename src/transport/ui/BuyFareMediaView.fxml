@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="transport.control.BuyFareMediaController"
+            prefHeight="768.0" prefWidth="1024.0">
+
+    <!-- Left Sidebar -->
+    <left>
+        <VBox styleClass="sidebar" prefWidth="200" spacing="10">
+            <padding>
+                <Insets top="20" right="10" bottom="20" left="10"/>
+            </padding>
+
+            <Label text="ESI-RUN" styleClass="sidebar-title"/>
+            <Label text="Transport System" styleClass="sidebar-subtitle"/>
+
+            <Separator/>
+
+            <Button text="Tableau de bord" styleClass="sidebar-button" onAction="#handleHome"/>
+            <Button text="Utilisateurs" styleClass="sidebar-button" onAction="#handleUsers"/>
+            <Button text="Titres" styleClass="sidebar-button, active-nav" onAction="#handleFareMedia"/>
+            <Button text="Validation" styleClass="sidebar-button" onAction="#handleValidation"/>
+            <Button text="Réclamations" styleClass="sidebar-button" onAction="#handleComplaints"/>
+
+            <Region VBox.vgrow="ALWAYS"/>
+
+            <Separator/>
+            <Button text="Déconnexion" styleClass="sidebar-button"/>
+        </VBox>
+    </left>
+
+    <!-- Main Content -->
+    <center>
+        <VBox spacing="20" style="-fx-padding: 20px;">
+            <Label text="Acheter un titre de transport" styleClass="section-title">
+                <font>
+                    <Font name="System Bold" size="24.0"/>
+                </font>
+            </Label>
+
+            <GridPane hgap="20" vgap="15">
+                <padding>
+                    <Insets top="20" right="20" bottom="20" left="20"/>
+                </padding>
+
+                <Label text="Sélectionner un utilisateur:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                <ComboBox fx:id="personneCombo" prefWidth="300" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                <Label text="Type de titre:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <VBox spacing="10" GridPane.rowIndex="1" GridPane.columnIndex="1">
+                    <RadioButton fx:id="ticketRadio" text="Ticket à usage unique"/>
+                    <RadioButton fx:id="carteRadio" text="Carte Personnelle"/>
+                </VBox>
+            </GridPane>
+
+            <GridPane hgap="20" vgap="15">
+                <padding>
+                    <Insets top="20" right="20" bottom="20" left="20"/>
+                </padding>
+
+                <Label text="Méthode de paiement:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                <ComboBox fx:id="modePaiementCombo" prefWidth="300" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                <Label text="Prix:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <Label fx:id="prixCarteLabel" text="Prix: N/A" styleClass="tile-value" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+            </GridPane>
+
+            <Button text="Acheter" onAction="#handleBuyFareMedia" styleClass="button" prefWidth="200"/>
+        </VBox>
+    </center>
+
+    <!-- Result Panel -->
+    <bottom>
+        <VBox fx:id="resultPanel" visible="false" managed="false" styleClass="card" spacing="10">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+
+            <Label fx:id="resultTitleLabel" text="Achat réussi" styleClass="card-title"/>
+            <Label fx:id="resultDetailsLabel" wrapText="true"/>
+
+            <HBox alignment="CENTER_RIGHT" spacing="10">
+                <Button text="Fermer" onAction="#handleCloseResult" styleClass="button-secondary"/>
+            </HBox>
+        </VBox>
+    </bottom>
+</BorderPane>
